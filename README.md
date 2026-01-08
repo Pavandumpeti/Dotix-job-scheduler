@@ -147,9 +147,28 @@ NEXT_PUBLIC_API_URL=https://your-render-backend
 
 ## 📸 Screenshots
 
-✔ ![Dashboard](./frontend/public/Dashboard.png)
-✔ ![Job Detail](./frontend/public/JobDetailScreen.png)
-✔ [Webhook](./frontend/public/Webhook.png)
+<table>
+  <tr>
+    <td align="center"><strong>Dashboard</strong></td>
+    <td align="center"><strong>Job Detail</strong></td>
+  </tr>
+  <tr>
+    <td>
+      <img src="./frontend/public/Dashboard.png" width="400" style="border-radius:10px;"/>
+    </td>
+    <td>
+      <img src="./frontend/public/JobDetailScreen.png" width="400" style="border-radius:10px;"/>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" colspan="2"><strong>Webhook Trigger Proof</strong></td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center">
+      <img src="./frontend/public/Webhook.png" width="600" style="border-radius:10px;"/>
+    </td>
+  </tr>
+</table>
 
 ## 🏁 Status
 
