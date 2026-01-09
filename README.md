@@ -6,57 +6,77 @@ This project is designed to demonstrate backend job processing, REST APIs, datab
 
 ---
 
-🚀 Live Links
-Component URL
+## 🚀 Live Demo
 
-Frontend (Next.js) https://job-scheduler-ten.vercel.app/
-
-Backend (Node/Express) https://job-scheduler-6xvu.onrender.com
-
-Webhook Test URL https://webhook.site/9aa7eedb-d1e2-4b24-991f-822c44180aeb
-
-## 🚀 Features
-
-- Create jobs with task name, payload, and priority
-- View all jobs in a dashboard
-- Run jobs manually
-- Track job status (pending → running → completed)
-- Trigger webhook automatically after job completion
-- Filter jobs by status and priority
-- RESTful API design
-- Clean UI using Tailwind CSS
+- **Frontend:** [https://job-scheduler-ten.vercel.app](https://job-scheduler-ten.vercel.app)
+- **Backend API:** [https://job-scheduler-6xvu.onrender.com](https://job-scheduler-6xvu.onrender.com)
+- **GitHub Repository:** [github.com/Pavandumpeti/Dotix-job-scheduler](https://github.com/Pavandumpeti/Dotix-job-scheduler)
 
 ---
 
-## 🧰 Tech Stack
+## ✨ Features
+
+- ✅ Create jobs with task name, payload, and priority
+- ✅ View all jobs in a beautiful dashboard
+- ✅ Run jobs manually with async execution
+- ✅ Track job status (pending → running → completed)
+- ✅ Trigger webhook automatically after job completion
+- ✅ Filter jobs by status and priority
+- ✅ RESTful API design with 5 core endpoints
+- ✅ Real-time UI updates with auto-refresh
+- ✅ Modern, responsive design with Tailwind CSS
+- ✅ Type-safe development with TypeScript
+
+---
+
+## 🛠️ Tech Stack
 
 ### Backend
-- Node.js
-- Express.js
-- MySQL
-- Axios
-- dotenv
-- cors
+- **Node.js** - JavaScript runtime
+- **Express.js** - REST API framework
+- **SQLite** - Lightweight database
+- **Axios** - HTTP client for webhooks
+- **Dotenv** - Environment variable management
+- **CORS** - Cross-origin resource sharing
 
 ### Frontend
-- Next.js
-- React
-- Tailwind CSS
-- Axios
+- **Next.js 16** - React meta-framework
+- **React 19** - UI library
+- **TypeScript** - Type safety
+- **Tailwind CSS** - Styling
+- **Lucide React** - Icon library
 
-### Database
-- MySQL
+### Deployment
+- **Vercel** - Frontend hosting
+- **Render** - Backend hosting
+- **Webhook.site** - Webhook testing
 
 ---
 
 ## 📁 Project Structure
 
+```
 root/
- ├── frontend/         # Next.js 14 UI
- │    ├── app/
- │    │   ├── page.tsx         # Dashboard UI
- │    │   └── jobs/[id].tsx    # Job detail view
- │    └── utils/api.ts         # API helpers
+├── frontend/                  # Next.js Application
+│    ├── src/
+│    │   ├── app/
+│    │   │   ├── page.tsx              # Dashboard (main page)
+│    │   │   ├── layout.tsx            # Root layout
+│    │   │   ├── globals.css           # Global styles
+│    │   │   └── jobs/[id]/page.tsx    # Job detail page
+│    │   └── utils/api.ts              # API client functions
+│    ├── package.json
+│    ├── tailwind.config.ts
+│    └── next.config.ts
+│
+└── backend/                   # Express Server
+     ├── server.js             # Main app entry point
+     ├── config/db.js          # Database configuration
+     ├── controllers/jobController.js  # Business logic
+     ├── utils/webhook.js      # Webhook trigger service
+     ├── package.json
+     └── .env.example          # Environment template
+```
  │
  └── backend/
       ├── server.js            # Main express app
