@@ -1,42 +1,56 @@
-# 📦 Job Scheduler & Automation Dashboard
+# Dotix – Job Scheduler & Automation System
 
-A full-stack mini automation engine that allows users to create jobs, run tasks asynchronously, track execution status, and trigger webhooks when a job completes.
+Dotix is a full-stack job scheduling and automation system that allows users to create, manage, and execute jobs with priorities. Once a job is completed, the system automatically triggers a webhook with job details.
 
-Built for Dotix Full Stack Developer Assignment.
+This project is designed to demonstrate backend job processing, REST APIs, database integration, and a modern frontend dashboard.
 
-## 🚀 Live Links
-Component	URL
-- Frontend (Next.js)	https://job-scheduler-ten.vercel.app/
+---
 
-- Backend (Node/Express)	https://job-scheduler-6xvu.onrender.com
+🚀 Live Links
+Component URL
 
-- Webhook Test URL	https://webhook.site/9aa7eedb-d1e2-4b24-991f-822c44180aeb
+Frontend (Next.js) https://job-scheduler-ten.vercel.app/
 
-## 🧠 Features
-### 🔧 Backend (Node.js + Express + SQLite)
+Backend (Node/Express) https://job-scheduler-6xvu.onrender.com
 
-- ✔ Create jobs
-- ✔ List jobs (with filters)
-- ✔ Get job details
-- ✔ Run job (simulate background task)
-- ✔ Update status → pending → running → completed
-- ✔ Trigger webhook on completion
-- ✔ Delete job
-- ✔ Uses SQLite (or MySQL easy migration)
+Webhook Test URL https://webhook.site/9aa7eedb-d1e2-4b24-991f-822c44180aeb
 
-### 🎨 Frontend (Next.js + Tailwind)
+## 🚀 Features
 
-- ✔ Create new job with dynamic payload
-- ✔ Dashboard with live refreshing
-- ✔ Status, priority & payload display
-- ✔ Filters (pending / running / completed + priority)
-- ✔ Run job action
-- ✔ Delete job
-- ✔ Job details page
-- ✔ Modern, clean UI
+- Create jobs with task name, payload, and priority
+- View all jobs in a dashboard
+- Run jobs manually
+- Track job status (pending → running → completed)
+- Trigger webhook automatically after job completion
+- Filter jobs by status and priority
+- RESTful API design
+- Clean UI using Tailwind CSS
 
-## 🏗️ Architecture
-```
+---
+
+## 🧰 Tech Stack
+
+### Backend
+- Node.js
+- Express.js
+- MySQL
+- Axios
+- dotenv
+- cors
+
+### Frontend
+- Next.js
+- React
+- Tailwind CSS
+- Axios
+
+### Database
+- MySQL
+
+---
+
+## 📁 Project Structure
+
 root/
  ├── frontend/         # Next.js 14 UI
  │    ├── app/
@@ -49,145 +63,125 @@ root/
       ├── controllers/jobController.js
       ├── utils/webhook.js
       ├── config/db.js         # SQLite DB
-```
 
-## 🛢️ Database Schema
-| Column      | Type     | Notes                         |
-| ----------- | -------- | ----------------------------- |
-| id          | Integer  | Primary Key                   |
-| taskName    | String   | Job name                      |
-| payload     | JSON     | Flexible data                 |
-| priority    | String   | Low / Medium / High           |
-| status      | String   | pending / running / completed |
-| createdAt   | DateTime | Auto-set                      |
-| completedAt | DateTime | Set when finished             |
+pgsql
+Copy code
 
-## 🚦 REST API Endpoints
-| Method     | Endpoint        | Description                  |
-| ---------- | --------------- | ---------------------------- |
-| POST       | `/jobs`         | Create a job                 |
-| GET        | `/jobs`         | List jobs (supports filters) |
-| GET        | `/jobs/:id`     | Get job details              |
-| POST       | `/run-job/:id`  | Run a job (simulates async)  |
-| DELETE     | `/jobs/:id`     | Delete job                   |
-| (internal) | webhook trigger | POSTs to webhook.site        |
+---
 
-### Example webhook payload:
-```
-{
-  "jobId": 12,
-  "taskName": "Send Email",
-  "priority": "High",
-  "payload": {
-    "email": "test@abc.com"
-  },
-  "completedAt": "2025-01-15T16:12:05.301Z"
-}
-```
+## 🗄️ Database Schema
 
-## 🧪 Webhook Testing
+```sql
+CREATE DATABASE dotix;
+USE dotix;
 
-1. Open https://webhook.site
-
-2. Copy your unique URL
-
-3. Add to .env in backend
-
-4. Run job → observe payload received automatically
-
-## 🔧 Local Setup
-- **Clone the repo**
-```
-git clone https://github.com/YOUR-USER/job-scheduler
-cd job-scheduler
-```
-
-- **Backend Setup**
-```
+CREATE TABLE jobs (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  taskName VARCHAR(255) NOT NULL,
+  payload JSON,
+  priority VARCHAR(20) NOT NULL,
+  status VARCHAR(20) NOT NULL DEFAULT 'pending',
+  completedAt TIMESTAMP NULL,
+  createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+⚙️ Backend Setup
+bash
+Copy code
 cd backend
 npm install
-npm start
-```
+npm run dev
+Create .env file:
 
-- Runs at: http://localhost:3001
+env
+Copy code
+PORT=5000
+DB_HOST=localhost
+DB_USER=root
+DB_PASS=your_mysql_password
+DB_NAME=dotix
+WEBHOOK_URL=https://webhook.site/your-id
+Backend runs at:
 
-- **Frontend Setup**
-```
+arduino
+Copy code
+http://localhost:5000
+🎨 Frontend Setup
+bash
+Copy code
 cd frontend
 npm install
 npm run dev
-```
+Create .env.local file:
 
-- Runs at: http://localhost:3000
+env
+Copy code
+NEXT_PUBLIC_API_URL=http://localhost:5000
+Frontend runs at:
 
-## 🌍 Deployment
-**Backend — Render**
+arduino
+Copy code
+http://localhost:3000
+🔌 API Endpoints
+Create Job
+bash
+Copy code
+POST /jobs
+Get All Jobs
+bash
+Copy code
+GET /jobs
+Get Job by ID
+bash
+Copy code
+GET /jobs/:id
+Run Job
+bash
+Copy code
+POST /run-job/:id
+🔔 Webhook Behavior
+When a job is completed, a POST request is sent to the configured webhook URL.
 
-- Select /backend folder
+Payload includes:
 
-- Build command: npm install
+Job ID
 
-- Start command: node server.js
+Task Name
 
-- Add env vars:
-```
-PORT=3001
-WEBHOOK_URL=https://webhook.site/your-id
-```
+Priority
 
-**Frontend — Vercel**
+Payload
 
-- Select /frontend
+Completion timestamp
 
-- Add env:
-```
-PORT=3001
-NEXT_PUBLIC_API_URL=https://your-render-backend
-```
+🧠 How It Works
+User creates a job from UI
 
-## 📸 Screenshots
+Job is stored in MySQL with pending status
 
-<table>
-  <tr>
-    <td align="center"><strong>Dashboard</strong></td>
-    <td align="center"><strong>Job Detail</strong></td>
-  </tr>
-  <tr>
-    <td>
-      <img src="./frontend/public/Dashboard.png" width="400" style="border-radius:10px;"/>
-    </td>
-    <td>
-      <img src="./frontend/public/JobDetailScreen.png" width="400" style="border-radius:10px;"/>
-    </td>
-  </tr>
-  <tr>
-    <td align="center" colspan="2"><strong>Webhook Trigger Proof</strong></td>
-  </tr>
-  <tr>
-    <td colspan="2" align="center">
-      <img src="./frontend/public/Webhook.png" width="600" style="border-radius:10px;"/>
-    </td>
-  </tr>
-</table>
+User clicks Run Job
 
-## 🏁 Status
+Backend updates job status to running
 
-🎉 All assignment requirements completed:
-- ✔ Create job
-- ✔ Run job
-- ✔ Track status
-- ✔ Webhook
-- ✔ Filters
-- ✔ Job detail
-- ✔ Delete job
-- ✔ Frontend + backend deployed
+Simulated execution completes
 
-## ⭐ Future Enhancements
+Job status updates to completed
 
-1. Auth & role-based access
+Webhook is triggered automatically
 
-2. Retry failed webhooks
+🤖 AI Usage Disclosure
+AI was used for:
 
-3. Move DB to MySQL/PlanetScale
+Code optimization
 
-4. Queue-based worker (BullMQ)
+Architecture guidance
+
+Documentation formatting
+
+All logic was reviewed, tested, and customized manually.
+
+✅ Status
+✔ Backend implemented
+✔ Frontend implemented
+✔ Database integrated
+✔ Webhook functional
