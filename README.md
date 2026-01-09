@@ -6,15 +6,6 @@ This project is designed to demonstrate backend job processing, REST APIs, datab
 
 ---
 
-🚀 Live Links
-Component URL
-
-Frontend (Next.js) https://job-scheduler-ten.vercel.app/
-
-Backend (Node/Express) https://job-scheduler-6xvu.onrender.com
-
-Webhook Test URL https://webhook.site/9aa7eedb-d1e2-4b24-991f-822c44180aeb
-
 ## 🚀 Features
 
 - Create jobs with task name, payload, and priority
