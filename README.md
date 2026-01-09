@@ -77,14 +77,6 @@ root/
      ├── package.json
      └── .env.example          # Environment template
 ```
- │
- └── backend/
-      ├── server.js            # Main express app
-      ├── controllers/jobController.js
-      ├── utils/webhook.js
-      ├── config/db.js         # SQLite DB
-
-pgsql
 Copy code
 
 ---
